@@ -53,8 +53,21 @@
 
 	</form>
 
+	<?php if (!is_null($reservation)){ ?>
 
-	<h2><?php echo $message; ?></h2>
+		<div>
+			<p>Récap de la réservation :</p>
+			<p>Nom : <?php echo $reservation->name; ?></p>
+			<p>Lieu : <?php echo $reservation->place; ?></p>
+			<p>Dates : <?php echo $reservation->startDate->format('d-m-y'); ?> / <?php echo $reservation->endDate->format('d-m-y'); ?></p>
+			<p>Prix total : <?php echo $reservation->totalPrice; ?></p>
+			<p>Option de ménage ? : <?php echo $reservation->cleaningOption ? "oui" : "non"; ?></p>
+		</div>
+		<?php 
+	} 
+?>
+
+
 
 </main>
 
