@@ -1,35 +1,28 @@
 <?php
-require_once ('../view/home-view.php');
-require_once('../model/reservation.model.php');
-require_once('../model/reservation.repository.php');
 
-//j'utilise la fonction findReservationForUser 
-//afin de récupérer la réservation crée par l'user 
-//celle ci est stockée ensuite dans la variable $reservationForUser
-$reservationForUser= findReservationForUser();
+require_once('../config.php'); //on récupere la confi
+require_once('../model/reservation.model.php'); //on récupere le model de la reservation contenant la class
+require_once('../model/reservation.repository.php'); // on récupere le repository contenant la fonction findReservationForUser
+require_once('../view/home-view.php');
+
+$reservationForUser = findReservationForUser(); // on cree la variable afin d'afficher le récapitulatif de la commande grace a la fonction
+
+$cancelMessage = "";
 
 
-//je vérifie si le formulaire a bien été envoyé
-if($_SERVER["REQUEST_METHOD"]=== "POST"){
+if ($_SERVER["REQUEST_METHOD"] === "POST") { 
+    // Vérification de la méthode POST
     
-    //je récupère la réservation 
-    $reservationForUser= findReservationForUser();
-
-    if($reservationForUser){
-
-        //annuler la réservation
-        //la fonction cancel () existe déjà dans reservation-model
-        $reservationForUser->cancel();
-
-        //réenregistrer dans la session
-        //la fonction persistReservation existe dans reservation-repository
+    // d'appeler la méthode 'cancel' correctement
+    if (isset($reservationForUser)) {
+        $reservationForUser->cancel(); // Ajout des parenthèses pour appeler la méthode
+        $cancelMessage = "Votre séjour est bien annulé"; // Correction des espaces et amélioration de la lisibilité
         persistReservation($reservationForUser);
-
-        //afficher un message 
-        echo "La réservation a bien été annulée.";
-    }else{
-        echo "Aucune réservation à annuler.";
+        
+    } else {
+        echo "Erreur : la réservation n'a pas été trouvée."; // Message d'erreur en cas de problème
     }
 }
 
-require_once('../view/cancel-reservation-view.php');
+
+require_once('../view/cancel-reservation.view.php'); // on récupere la view annuler la commande contenant la page annuler la commande 
