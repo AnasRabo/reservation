@@ -82,6 +82,3 @@ class Reservation {
 }
 
 
-// en dehors de la classe si les propriétés sont en public : je peux y accéder / les modifier
-// si elles sont en privé : je peux pas y accéder, ni les modifier. Je suis obligé de passer
-// par les fonctions (constructor, pay, cancel) pour modifier ma réservation
