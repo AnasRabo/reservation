@@ -20,7 +20,7 @@
 
 <main>
 	
-	<h1>Bienvenue sur le système de réservation</h1>
+	<h1> système de réservation</h1>
 
 </main>
 
